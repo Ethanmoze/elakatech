@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaka Tech - IT Solutions and Web Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* New Font-Face for Headings */
+        @font-face {
+            font-family: 'Karla';
+            src: url('./fonts/karla-bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* New Font-Face for Body Text */
+        @font-face {
+            font-family: 'Formular';
+            src: url('./fonts/formular-regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --light-bg: #F5F5F5;
+            --accent-red: #F44336;
+        }
+
+        body {
+            /* Using Formular for all body text */
+            font-family: 'Formular', sans-serif;
+            background-color: var(--light-bg);
+            color: black;
+        }
+
+        /* Applying Karla to all heading tags and other key elements */
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Karla', sans-serif;
+        }
+        
+        /* Adjusted letter spacing for headings for a cleaner UI */
+        h1 {
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            letter-spacing: 1px;
+        }
+
+        .circle-image {
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .section-header {
+            color: var(--accent-red);
+        }
+
+        .service-heading-red {
+            color: #E5203A;
+        }
+
+        /* --- Parallax Styles --- */
+        .parallax-section {
+            position: relative;
+            overflow: hidden;
+            color: white; /* Default text color for sections with dark background */
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll; /* Change from 'fixed' to 'scroll' */
+            z-index: -1;
+            /* UPDATED: Increased brightness from 0.4 to 0.8 */
+            filter: brightness(0.8); /* Darkens the background image */
+            transform: translateY(0); /* Add this line to enable transforms */
+            transition: transform 0.1s linear; /* Optional: for a subtle, smooth motion */
+        }
+
+        /* Backgrounds for each service section */
+        #services-microsoft .parallax-bg {
+            background-image: url('./images/it-services.jpg');
+        }
+
+        #services-digitalization .parallax-bg {
+            background-image: url('./images/digitalization.jpg');
+        }
+
+        #services-cybersecurity .parallax-bg {
+            background-image: url('./images/security.jpg');
+        }
+        /* UPDATED: The user wants black headings for services */
+        .service-heading {
+            color: black;
+        }
+        /* --- End Parallax Styles --- */
+
+        /* Client Logo Carousel */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .logo-carousel-container {
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            width: 100%;
+        }
+
+        .logo-carousel {
+            display: inline-flex;
+            animation: scroll-left 40s linear infinite;
+        }
+
+        .logo-carousel:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-carousel img {
+            height: 80px;
+            margin-right: 3rem;
+            flex-shrink: 0;
+            max-width: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-carousel img:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Section Animations */
+        @keyframes rotate-slowly {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-rotate-slowly {
+            animation: rotate-slowly 60s linear infinite;
+        }
+
+        /* NEW: Staggered Words for the Hero Section and Services */
+        @keyframes word-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* NEW: Hero Words Fade In on Page Load */
+        .animated-word-hero {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: word-fade-in 1s ease-out forwards;
+        }
+
+        /* NEW: Dramatic Hero Word Animation */
+        @keyframes dramatic-fade-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        /* NEW: Dramatic Service Heading Word Animation */
+        @keyframes dramatic-service-word-fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .dramatic-word {
+            opacity: 0;
+            animation: dramatic-fade-in 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            font-family: 'Karla', sans-serif;
+        }
+
+        /* Corrected: Applying the animation via a class */
+        .animated-service-word {
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animated-service-word.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: dramatic-service-word-fade-in 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        /* NEW: Animation for Service Descriptions */
+        .animated-service-description {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animated-service-description.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-content {
+            opacity: 0;
+            animation: fade-in 1s ease-out forwards;
+            animation-delay: 3s; /* Delay the whole container's fade-in */
+        }
+        
+        /* Updated: Scroll Animation for all other sections and elements */
+        @keyframes slide-up-fade {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+        }
+
+        .animate-on-scroll.is-visible {
+            animation: slide-up-fade 1s ease-out forwards;
+        }
+
+        .animate-on-scroll.fade-in.is-visible {
+            animation: fade-in 1s ease-out forwards;
+        }
+
+        /* Header Scroll Effect - Updated for dynamic gradient */
+        #main-header {
+            /* Set initial background to the first gradient */
+            background: linear-gradient(to right, #FC210D, #F7CE38);
+            background-size: 200% 200%;
+            transition: background 0.4s ease-out, box-shadow 0.4s ease-out, transform 0.4s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            /* NEW: Apply the color cycle animation */
+            animation: header-gradient-cycle 15s ease infinite alternate;
+        }
+        
+        /* NEW: Keyframes for the gradient cycling animation */
+        @keyframes header-gradient-cycle {
+            0% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(to right, #FC210D, #F7CE38);
+            }
+            33% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(to right, #00AFB9, #FED9B7);
+            }
+            66% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(to right, #F07167, #F44336);
+            }
+            100% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(to right, #FC210D, #F7CE38);
+            }
+        }
+
+        #main-header.scrolled {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Stop the animation when scrolled */
+            animation: none; 
+        }
+
+        .header-link, .header-svg {
+            color: white;
+            stroke: white;
+            transition: color 0.3s ease;
+        }
+        
+        /* NEW: Change link/logo colors when scrolled */
+        #main-header.scrolled .header-link,
+        #main-header.scrolled .header-svg,
+        #main-header.scrolled #header-logo {
+            color: black;
+            stroke: black;
+            filter: none !important;
+        }
+
+        .header-link:hover {
+            color: white;
+            text-shadow: none;
+        }
+
+        /* NEW: Specific hover color for Energy link */
+        #energy-link:hover {
+            color: #4CAF50 !important;
+        }
+        
+        /* NEW: Change link color on hover when scrolled */
+        #main-header.scrolled .header-link:hover {
+            color: var(--accent-red);
+        }
+
+        #main-header.scrolled #energy-link:hover {
+            color: #4CAF50 !important;
+        }
+
+        #header-logo {
+            /* Initial filter to make logo white */
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .header-link {
+            position: relative;
+        }
+
+        .header-link::after {
+            content: '';
+            position: absolute;
+            top: -0.5rem;
+            left: -1rem;
+            right: -1rem;
+            bottom: -0.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+        
+        /* NEW: Change hover effect background color when scrolled */
+        #main-header.scrolled .header-link::after {
+             background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .header-link:hover::after {
+            transform: scale(1);
+        }
+
+        /* NEW: Gradient Border for Contact Form */
+        .form-gradient-border {
+            position: relative;
+            background: white; /* Inner background color */
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 1.5rem; /* Padding inside the form */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Soft shadow */
+        }
+
+        .form-gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            /* Adjusted gradient to be more reddish */
+            background: linear-gradient(45deg, #C82B00, #6B0E0E);
+            border-radius: 0.5rem;
+            z-index: -1;
+        }
+
+        /* NEW: Breathing Gradient Animation for Explore Button */
+        .explore-button {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+            /* Applying the breathing animation */
+            animation: breathing-gradient 5s ease-in-out infinite alternate;
+            background-size: 200% 200%;
+        }
+
+        @keyframes breathing-gradient {
+            0% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(45deg, #F44336, #E5203A, #FF7F50);
+            }
+            50% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(45deg, #FF7F50, #E5203A, #F44336);
+            }
+            100% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(45deg, #F44336, #E5203A, #FF7F50);
+            }
+        }
+
+        /* Removed old hover effect to avoid conflict */
+        .explore-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(244, 67, 54, 0.4), 0 6px 6px rgba(244, 67, 54, 0.2);
+        }
+        
+        /* The new rotating light effect */
+        .explore-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+            transform-origin: 50% 50%;
+            z-index: -1;
+            animation: spin 3s linear infinite; /* Continuous rotation */
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+                opacity: 0.7;
+            }
+        }
+
+        .explore-button:hover::before {
+            opacity: 1;
+            animation-duration: 1.5s; /* Speed up on hover */
+        }
+
+        /* NEW: Burn Away Animation */
+        @keyframes burnaway {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: none;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+                box-shadow: 0 0 20px 5px rgba(255, 165, 0, 0.7), 0 0 30px 10px rgba(255, 0, 0, 0.5);
+            }
+            100% {
+                transform: scale(0.1);
+                opacity: 0;
+                box-shadow: 0 0 50px 20px rgba(255, 140, 0, 0), 0 0 80px 30px rgba(255, 69, 0, 0);
+            }
+        }
+
+        /* UPDATED: Apply the burnaway effect to both the button and the hero content */
+        .explore-button.is-burning,
+        .hero-content.is-burning {
+            animation: burnaway 3.5s ease-out forwards;
+            pointer-events: none; /* Disables clicking during animation */
+        }
+
+        /* NEW: Burn In Animation for the Services section */
+        @keyframes burnin {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .burn-in-container {
+            position: relative;
+            background-color: white;
+            padding: 3rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .burn-in-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #C82B00, #6B0E0E);
+            border-radius: 0.5rem;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(5px);
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .is-burning-in {
+            animation: burnin 3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+        
+        /* NEW: Mist-away animation for the "Talk to Us" button */
+        @keyframes mist-away {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: none;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+                box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.7), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                transform: scale(0.1);
+                opacity: 0;
+                box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0), 0 0 80px 30px rgba(255, 255, 255, 0);
+            }
+        }
+        
+        .talk-to-us-button.is-misting,
+        .hero-content.is-misting {
+            animation: mist-away 3.5s ease-out forwards;
+            pointer-events: none; /* Disables clicking during animation */
+        }
+    </style>
+</head>
+<body class="bg-[var(--light-bg)] text-gray-900">
+
+    <header id="main-header" class="shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-center items-center rounded-b-xl relative">
+            <a href="#home" class="text-2xl font-bold text-gray-900 transition duration-300 absolute left-6 top-1/2 -translate-y-1/2 font-heading">
+                <img id="header-logo" src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300">
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <div class="relative group">
+                    <a href="#services" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300 flex items-center">
+                        IT Service
+                    </a>
+                    <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-max rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-50">
+                        <div class="flex p-4 space-x-8">
+                            <div class="w-1/3">
+                                <h3 class="text-lg font-bold text-gray-900 mb-2 font-heading">Microsoft Cloud Services</h3>
+                                <div class="space-y-1">
+                                    <a href="#services-microsoft" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">CRM and ERP</a>
+                                    <a href="#services-microsoft" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">Microsoft 365</a>
+                                    <a href="#services-microsoft" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">Power Platform</a>
+                                </div>
+                            </div>
+                            <div class="w-1/3">
+                                <h3 class="text-lg font-bold text-gray-900 mb-2 font-heading">Digitalization and IT</h3>
+                                <div class="space-y-1">
+                                    <a href="#services-digitalization" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">AI and Automation</a>
+                                    <a href="#services-digitalization" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">Software and Hardware</a>
+                                    <a href="#services-digitalization" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">Networks and Infrastructure</a>
+                                    <a href="#services-digitalization" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">Managed IT</a>
+                                </div>
+                            </div>
+                            <div class="w-1/3">
+                                <h3 class="text-lg font-bold text-gray-900 mb-2 font-heading">Cybersecurity</h3>
+                                <div class="space-y-1">
+                                    <a href="#services-cybersecurity" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">Governance, Risk and Compliance</a>
+                                    <a href="#services-cybersecurity" class="block text-sm text-gray-600 hover:text-[var(--accent-red)]">Threat Detection and Response</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" id="energy-link" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300">Energy</a>
+                <a href="schools.html" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300">Schools</a>
+                <a href="#about" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300">About Us</a>
+                <a href="#contact-us" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="relative py-16 md:py-24 overflow-hidden video-hero-container">
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+                <source src="./videos/elaka-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="absolute inset-0 bg-gray-900 opacity-70 z-10"></div>
+            <div class="container mx-auto px-6 text-center relative z-20 hero-content">
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-4 font-heading">
+                    <span class="animated-word-hero">Building</span>
+                    <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 3.5s;">secure,</span>
+                    <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 3.8s;">scalable</span>
+                    <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 4.1s;">and</span>
+                    <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 4.4s;">smart</span>
+                    <br class="animated-word-hero" />
+                    <span class="animated-word-hero">Enterprise</span>
+                    <span class="animated-word-hero">and</span>
+                    <span class="animated-word-hero">Business</span>
+                    <span class="animated-word-hero">systems.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 animate-on-scroll">
+                    From Microsoft Cloud to Managed IT and Cybersecurity—Elaka Technologies turns ideas into resilient digital experiences.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#" id="explore-services-btn" class="bg-[var(--accent-red)] text-white px-8 py-3 rounded-full font-semibold explore-button">
+                        Explore Services
+                    </a>
+                    <a href="#" id="talk-to-us-btn" class="bg-white text-[var(--accent-red)] px-8 py-3 rounded-full font-semibold border border-[var(--accent-red)] hover:bg-[var(--accent-red)] hover:text-white transition duration-300 talk-to-us-button">
+                        Talk to Us
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <section id="services" class="py-12 md:py-16 z-20 relative bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 font-heading">Our Services</h2>
+            </div>
+        </section>
+
+        <section id="services-microsoft" class="py-16 md:py-24 parallax-section animate-on-scroll">
+            <div class="parallax-bg"></div>
+            <div class="container mx-auto px-6 relative z-10 bg-black bg-opacity-50 p-8 rounded-lg max-w-2xl text-left">
+                <h3 class="text-4xl font-bold mb-4 font-heading text-white service-heading">
+                    Powering your business with Microsoft Cloud
+                </h3>
+                <h4 class="text-2xl font-bold text-gray-300 mb-4 animated-service-description">What’s included:</h4>
+                <div class="space-y-4">
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            CRM and ERP
+                        </p>
+                        <p class="text-gray-300">
+                            Streamline your operations with tailored business applications.
+                        </p>
+                    </div>
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            Microsoft 365
+                        </p>
+                        <p class="text-gray-300">
+                            Enhance productivity and collaboration with the full suite of Microsoft tools.
+                        </p>
+                    </div>
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            Power Platform
+                        </p>
+                        <p class="text-gray-300">
+                            Automate workflows and build custom solutions with low-code tools.
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="#services-microsoft" class="bg-[var(--accent-red)] text-white px-8 py-3 rounded-full font-semibold explore-button">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services-digitalization" class="py-16 md:py-24 parallax-section animate-on-scroll">
+            <div class="parallax-bg"></div>
+            <div class="container mx-auto px-6 relative z-10 bg-black bg-opacity-50 p-8 rounded-lg max-w-2xl text-left">
+                <h3 class="text-4xl font-bold mb-4 font-heading text-white service-heading">
+                    Driving growth with Digitalization and IT
+                </h3>
+                <h4 class="text-2xl font-bold text-gray-300 mb-4 animated-service-description">What’s included:</h4>
+                <div class="space-y-4">
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            AI and Automation
+                        </p>
+                        <p class="text-gray-300">
+                            Transform workflows and drive efficiency with intelligent automation.
+                        </p>
+                    </div>
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            Software and Hardware
+                        </p>
+                        <p class="text-gray-300">
+                            Get the right tools to power your operations, from devices to enterprise software.
+                        </p>
+                    </div>
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            Managed IT
+                        </p>
+                        <p class="text-gray-300">
+                            Rely on our team for proactive management and support, 24/7.
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="#services-digitalization" class="bg-[var(--accent-red)] text-white px-8 py-3 rounded-full font-semibold explore-button">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services-cybersecurity" class="py-16 md:py-24 parallax-section animate-on-scroll">
+            <div class="parallax-bg"></div>
+            <div class="container mx-auto px-6 relative z-10 bg-black bg-opacity-50 p-8 rounded-lg max-w-2xl text-left">
+                <h3 class="text-4xl font-bold mb-4 font-heading text-white service-heading">
+                    Securing your future with Cybersecurity
+                </h3>
+                <h4 class="text-2xl font-bold text-gray-300 mb-4 animated-service-description">What’s included:</h4>
+                <div class="space-y-4">
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            Governance, Risk and Compliance
+                        </p>
+                        <p class="text-gray-300">
+                            Navigate complex regulations and protect your business reputation.
+                        </p>
+                    </div>
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            Threat Detection and Response
+                        </p>
+                        <p class="text-gray-300">
+                            Proactively identify and neutralize threats before they impact your operations.
+                        </p>
+                    </div>
+                    <div class="animated-service-description">
+                        <p class="text-lg font-bold text-gray-200">
+                            Identity and Access Management
+                        </p>
+                        <p class="text-gray-300">
+                            Control who has access to your critical data and systems.
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="#services-cybersecurity" class="bg-[var(--accent-red)] text-white px-8 py-3 rounded-full font-semibold explore-button">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-it-matters" class="py-16 md:py-24 bg-white animate-on-scroll">
+            <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl">
+                <div class="text-center lg:text-left">
+                    <span class="section-header text-lg font-semibold mb-4 block animate-on-scroll fade-in">
+                        WHY IT MATTERS
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight animate-on-scroll fade-in font-heading">
+                        Powering growth through <span class="text-[var(--accent-red)]">digital synergy.</span>
+                    </h2>
+                    <p class="text-gray-700 text-lg mb-6 leading-relaxed animate-on-scroll">
+                        Success depends on two engines: <b class="font-bold">infrastructure</b> and <b class="font-bold">platforms</b>. Infrastructure provides reliability and security. Platforms ignite agility and innovation. When aligned, they drive transformation. When misaligned, progress slows.
+                    </p>
+                    <div class="bg-gray-100 p-6 rounded-lg border-l-4 border-[var(--accent-red)] shadow-inner animate-on-scroll">
+                        <p class="text-gray-900 text-lg font-bold leading-relaxed">
+                            At Elaka Technologies, we engineer the perfect balance—strengthening your foundations while unleashing your platforms' full potential.
+                        </p>
+                    </div>
+                    
+                </div>
+                <div class="flex justify-center items-center p-4 animate-on-scroll">
+                    <img src="./images/why.jpg" alt="Why It Matters Image" class="w-full max-w-md md:max-w-lg lg:max-w-xl">
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 md:py-24 bg-white rounded-t-[40px] shadow-xl animate-on-scroll">
+            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="flex justify-center md:justify-start animate-on-scroll">
+                    <div class="relative w-80 h-80 bg-gray-300 rounded-full flex items-center justify-center">
+                        <img src="https://placehold.co/400x400/F5F5F5/000?text=About+Us+Image" alt="A professional smiling" class="circle-image w-full h-full">
+                    </div>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <span class="section-header font-semibold mb-2 block animate-on-scroll">About Us</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 animate-on-scroll font-heading">The Story Behind Elaka Tech</h2>
+                    <p class="text-gray-700 text-lg mb-8 animate-on-scroll">
+                        Elaka Tech began with a simple mission—to turn ideas into impactful solutions. Today, we help businesses thrive through innovation, expertise, and a passion for what we do.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                        <div class="bg-gray-100 rounded-lg p-6 shadow-md border-t-4 border-[var(--accent-red)] animate-on-scroll">
+                            <h3 class="text-3xl font-bold text-[var(--accent-red)] font-heading">1K+</h3>
+                            <p class="text-gray-600 text-sm">Projects Complete</p>
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-6 shadow-md border-t-4 border-[var(--accent-red)] animate-on-scroll" style="animation-delay: 0.2s;">
+                            <h3 class="text-3xl font-bold text-[var(--accent-red)] font-heading">10+</h3>
+                            <p class="text-gray-600 text-sm">Industries Covered</p>
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-6 shadow-md border-t-4 border-[var(--accent-red)] animate-on-scroll" style="animation-delay: 0.4s;">
+                            <h3 class="text-3xl font-bold text-[var(--accent-red)] font-heading">8+</h3>
+                            <p class="text-gray-600 text-sm">Years of Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-us" class="py-16 md:py-24 animate-on-scroll">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4 section-header animate-on-scroll font-heading">Get in Touch</h1>
+                <p class="text-center text-gray-700 mb-12 max-w-2xl mx-auto animate-on-scroll">
+                    Have a question or a project in mind? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
+                </p>
+
+                <div class="max-w-xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-xl animate-on-scroll form-gradient-border">
+                    <form action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-600">Full Name</label>
+                            <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-1 focus:ring-[var(--accent-red)]">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-600">Email Address</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-1 focus:ring-[var(--accent-red)]">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-600">Subject</label>
+                            <input type="text" id="subject" name="subject" class="mt-1 block w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-1 focus:ring-[var(--accent-red)]">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-600">Your Message</label>
+                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-1 focus:ring-[var(--accent-red)]"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-[var(--accent-red)] text-white font-semibold py-3 px-8 rounded-full hover:bg-red-700 transition duration-300">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="clients" class="py-16 bg-white shadow-inner animate-on-scroll">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-900 animate-on-scroll font-heading">Our Trusted Partners</h2>
+                <div class="logo-carousel-container">
+                    <div class="logo-carousel" id="logo-carousel">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 animate-on-scroll">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div class="animate-on-scroll" style="animation-delay: 0.1s;">
+                 <img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-12 mx-auto md:mx-0 mb-4 filter brightness(0) invert(1)">
+                <p class="text-sm">East Africa</p>
+                <p class="text-sm">Branches in Kampala and Gulu, Uganda</p>
+                <p class="text-sm mt-4">Tel: <a href="tel:0786866440" class="hover:text-[var(--accent-red)] transition-colors duration-300">0786-866-440</a></p>
+                <p class="text-sm">Email: <a href="mailto:elakatech1@gmail.com" class="hover:text-[var(--accent-red)] transition-colors duration-300">elakatech1@gmail.com</a></p>
+            </div>
+
+            <div class="animate-on-scroll" style="animation-delay: 0.2s;">
+                <h3 class="text-lg font-bold text-white mb-4 font-heading">Our Services</h3>
+                <ul class="space-y-2">
+                    <li><a href="#services-microsoft" class="hover:text-[var(--accent-red)] transition-colors duration-300">Microsoft Cloud Services</a></li>
+                    <li><a href="#services-digitalization" class="hover:text-[var(--accent-red)] transition-colors duration-300">Digitalization and IT</a></li>
+                    <li><a href="#services-cybersecurity" class="hover:text-[var(--accent-red)] transition-colors duration-300">Cybersecurity</a></li>
+                </ul>
+            </div>
+
+            <div class="animate-on-scroll" style="animation-delay: 0.3s;">
+                <h3 class="text-lg font-bold text-white mb-4 font-heading">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#about" class="hover:text-[var(--accent-red)] transition-colors duration-300">About Us</a></li>
+                    <li><a href="#contact-us" class="hover:text-[var(--accent-red)] transition-colors duration-300">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-8 pt-4 border-t border-gray-700 text-center animate-on-scroll">
+            <p class="text-sm">&copy; 2025 Elaka Tech. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Header Scroll Effect - Dynamic Gradient
+            const header = document.getElementById('main-header');
+            const links = document.querySelectorAll('.header-link');
+            const logo = document.getElementById('header-logo');
+            
+            function updateHeader() {
+                const scrollY = window.scrollY;
+                if (scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', updateHeader);
+
+            // Updated Scroll Animation for sections
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // No unobserve here, so the animation can run again if element leaves and re-enters view
+                    } else {
+                        // Optional: remove class to reset the animation for re-entry
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // NEW: Intersection Observer for animated words
+            const animatedWordsObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Get all child spans and add the visibility class
+                        const words = entry.target.querySelectorAll('.animated-service-word');
+                        words.forEach((word, index) => {
+                            word.style.animationDelay = `${index * 0.1}s`;
+                            word.classList.add('is-visible');
+                        });
+                        // Stop observing once all words have appeared
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.5 // Trigger when 50% of the element is visible
+            });
+
+            // Target the parent containers of the words
+            // UPDATED: Now targeting the new service-heading class
+            const parallaxHeadings = document.querySelectorAll('.parallax-section .service-heading');
+            parallaxHeadings.forEach(heading => {
+                // Correctly handles the & character
+                const textWithAmpersand = heading.innerHTML.replace(/and/g, '&');
+                const words = textWithAmpersand.split(/\s+/);
+                
+                // Wrap each word in a span
+                heading.innerHTML = words.map(word => `<span class="animated-service-word">${word}</span>`).join(' ');
+                
+                animatedWordsObserver.observe(heading);
+            });
+
+            // NEW: Service Description Animation
+            const descriptionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        descriptionObserver.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            const serviceDescriptions = document.querySelectorAll('.animated-service-description');
+            serviceDescriptions.forEach(desc => {
+                descriptionObserver.observe(desc);
+            });
+
+            // NEW: Hero section word animation
+            const heroWords = document.querySelectorAll('.animated-word-hero');
+            heroWords.forEach((word, index) => {
+                word.style.animationDelay = `${3.5 + index * 0.1}s`;
+            });
+
+            // NEW: Dramatic Hero Word Animation
+            const dramaticWords = document.querySelectorAll('.dramatic-word');
+            dramaticWords.forEach((word, index) => {
+                word.style.animationDelay = `${3.5 + index * 0.3}s`;
+            });
+            
+            // NEW: Smooth Parallax Effect
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            const parallaxSpeed = 0.5; // Controls the speed of the parallax effect
+
+            function handleParallax() {
+                parallaxSections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const scrollPosition = window.scrollY;
+
+                    // Check if the section is in the viewport
+                    if (scrollPosition + window.innerHeight > sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        // Calculate how much to move the background
+                        const yPos = (scrollPosition - sectionTop) * parallaxSpeed;
+                        const parallaxBg = section.querySelector('.parallax-bg');
+
+                        if (parallaxBg) {
+                            parallaxBg.style.transform = `translateY(${yPos}px)`;
+                        }
+                    }
+                });
+            }
+
+            // Attach the function to the scroll event
+            window.addEventListener('scroll', handleParallax);
+            // Call it once on load to set the initial position
+            handleParallax();
+
+
+            // Client Logo Carousel Duplication
+            const logoCarousel = document.getElementById('logo-carousel');
+            const images = [
+                './images/client-logo-1.png',
+                './images/client-logo-2.png',
+                './images/client-logo-3.png',
+                './images/client-logo-4.png',
+                './images/client-logo-5.png',
+                './images/client-logo-6.png',
+                './images/client-logo-7.png'
+            ];
+
+            function populateCarousel() {
+                logoCarousel.innerHTML = '';
+                const allImages = [...images, ...images];
+                allImages.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = 'Client Logo';
+                    img.className = 'w-auto h-16';
+                    logoCarousel.appendChild(img);
+                });
+            }
+
+            populateCarousel();
+
+            // Button click handlers with new scroll-back-up logic
+            const exploreBtn = document.getElementById('explore-services-btn');
+            const talkBtn = document.getElementById('talk-to-us-btn');
+            const heroContent = document.querySelector('.hero-content');
+            const servicesSectionContent = document.getElementById('services');
+            const contactSectionContent = document.getElementById('contact-us');
+
+            if (exploreBtn) {
+                exploreBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    heroContent.classList.add('is-burning');
+                    exploreBtn.classList.add('is-burning');
+
+                    // Smoothly scroll to the services section after a short delay
+                    setTimeout(() => {
+                        servicesSectionContent.scrollIntoView({ behavior: 'smooth' });
+                    }, 3500);
+                });
+            }
+            
+            if (talkBtn) {
+                talkBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    heroContent.classList.add('is-misting');
+                    talkBtn.classList.add('is-misting');
+
+                    // Smoothly scroll to the contact us section after a short delay
+                    setTimeout(() => {
+                        contactSectionContent.scrollIntoView({ behavior: 'smooth' });
+                    }, 3500);
+                });
+            }
+
+            // NEW: Intersection Observer to reset hero content when it comes back into view
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Check if the hero section is intersecting and not the first time on page load
+                    if (entry.isIntersecting && window.scrollY > 0) {
+                        heroContent.classList.remove('is-burning', 'is-misting');
+                        exploreBtn.classList.remove('is-burning');
+                        talkBtn.classList.remove('is-misting');
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            const heroSection = document.querySelector('.video-hero-container');
+            if (heroSection) {
+                heroObserver.observe(heroSection);
+            }
+        });
+    </script>
+</body>
+</html>

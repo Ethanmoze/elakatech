@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaka Tech - Schools & Education Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* New Font-Face for Headings */
+        @font-face {
+            font-family: 'Karla';
+            src: url('./fonts/karla-bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* New Font-Face for Body Text */
+        @font-face {
+            font-family: 'Formular';
+            src: url('./fonts/formular-regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --light-bg: #F5F5F5;
+            --accent-red: #F44336;
+        }
+
+        body {
+            /* Using Formular for all body text */
+            font-family: 'Formular', sans-serif;
+            background-color: var(--light-bg);
+            color: black;
+            overflow-x: hidden;
+        }
+
+        /* Applying Karla to all heading tags and other key elements */
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Karla', sans-serif;
+        }
+
+        /* Adjusted letter spacing for headings for a cleaner UI */
+        h1 {
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            letter-spacing: 1px;
+        }
+
+        .section-header {
+            color: var(--accent-red);
+        }
+        
+        .circle-image {
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Shared Styles from Home Page */
+        .parallax-section {
+            position: relative;
+            overflow: hidden;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+            z-index: -1;
+            filter: brightness(0.4);
+            transform: translateY(0);
+            transition: transform 0.1s linear;
+        }
+        
+        #schools-hero .parallax-bg {
+            background-image: url('./images/schools-home.jpg');
+        }
+        
+        .form-gradient-border {
+            position: relative;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #C82B00, #6B0E0E);
+            border-radius: 0.5rem;
+            z-index: -1;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+        }
+
+        .animate-on-scroll.is-visible {
+            animation: slide-up-fade 1s ease-out forwards;
+        }
+        
+        @keyframes slide-up-fade {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-on-scroll.fade-in.is-visible {
+            animation: fade-in 1s ease-out forwards;
+        }
+        
+        /* Word Animations */
+        @keyframes word-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated-word {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: word-fade-in 1s ease-out forwards;
+        }
+
+        @keyframes dramatic-fade-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .dramatic-word {
+            opacity: 0;
+            animation: dramatic-fade-in 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        .hero-content {
+            opacity: 0;
+            animation: fade-in 1s ease-out forwards;
+            /* REMOVED: Long animation delay that was causing the page to appear stuck */
+        }
+        
+        /* Button Animations */
+        @keyframes burnaway {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: none;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+                box-shadow: 0 0 20px 5px rgba(255, 165, 0, 0.7), 0 0 30px 10px rgba(255, 0, 0, 0.5);
+            }
+            100% {
+                transform: scale(0.1);
+                opacity: 0;
+                box-shadow: 0 0 50px 20px rgba(255, 140, 0, 0), 0 0 80px 30px rgba(255, 69, 0, 0);
+            }
+        }
+
+        .explore-button.is-burning,
+        .hero-content.is-burning {
+            animation: burnaway 3.5s ease-out forwards;
+            pointer-events: none; /* Disables clicking during animation */
+        }
+        
+        @keyframes mist-away {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: none;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+                box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.7), 0 0 30px 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                transform: scale(0.1);
+                opacity: 0;
+                box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0), 0 0 80px 30px rgba(255, 255, 255, 0);
+            }
+        }
+        
+        .talk-to-us-button.is-misting,
+        .hero-content.is-misting {
+            animation: mist-away 3.5s ease-out forwards;
+            pointer-events: none; /* Disables clicking during animation */
+        }
+        
+        /* Header Scroll Effect - Updated for dynamic gradient */
+        #main-header {
+            /* Set initial background to the first gradient */
+            background: linear-gradient(to right, #FC210D, #F7CE38);
+            background-size: 200% 200%;
+            transition: background 0.4s ease-out, box-shadow 0.4s ease-out, transform 0.4s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            /* NEW: Apply the color cycle animation */
+            animation: header-gradient-cycle 15s ease infinite alternate;
+        }
+        
+        /* NEW: Keyframes for the gradient cycling animation */
+        @keyframes header-gradient-cycle {
+            0% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(to right, #FC210D, #F7CE38);
+            }
+            33% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(to right, #00AFB9, #FED9B7);
+            }
+            66% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(to right, #F07167, #F44336);
+            }
+            100% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(to right, #FC210D, #F7CE38);
+            }
+        }
+
+        #main-header.scrolled {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Stop the animation when scrolled */
+            animation: none; 
+        }
+
+        .header-link, .header-svg {
+            color: white;
+            stroke: white;
+            transition: color 0.3s ease;
+        }
+        
+        /* NEW: Change link/logo colors when scrolled */
+        #main-header.scrolled .header-link,
+        #main-header.scrolled .header-svg,
+        #main-header.scrolled #header-logo {
+            color: black;
+            stroke: black;
+            filter: none !important;
+        }
+
+        .header-link:hover {
+            color: white;
+            text-shadow: none;
+        }
+
+        /* NEW: Specific hover color for Energy link */
+        #energy-link:hover {
+            color: #4CAF50 !important;
+        }
+        
+        /* NEW: Change link color on hover when scrolled */
+        #main-header.scrolled .header-link:hover {
+            color: var(--accent-red);
+        }
+
+        #main-header.scrolled #energy-link:hover {
+            color: #4CAF50 !important;
+        }
+
+        #header-logo {
+            /* Initial filter to make logo white */
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .header-link {
+            position: relative;
+        }
+
+        .header-link::after {
+            content: '';
+            position: absolute;
+            top: -0.5rem;
+            left: -1rem;
+            right: -1rem;
+            bottom: -0.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+        
+        /* NEW: Change hover effect background color when scrolled */
+        #main-header.scrolled .header-link::after {
+             background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .header-link:hover::after {
+            transform: scale(1);
+        }
+        
+        /* Specific hover effect for the Energy link */
+        .energy-link:hover {
+            color: #004d00; /* Darker green for text */
+        }
+
+        .energy-link:hover::after {
+            background-color: rgba(0, 77, 0, 0.4); /* Darker, more prominent green overlay */
+        }
+        
+        /* Splash Screen styles */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #FC210D, #F7CE38);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            animation: fade-in 1s forwards;
+            pointer-events: none;
+        }
+
+        #splash-screen.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #splash-screen.fade-out {
+            animation: dramatic-fade-out 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes dramatic-fade-out {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        
+        .splash-text {
+            font-family: 'Karla', sans-serif;
+            font-size: 2rem;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            animation: dramatic-text-fade 1.5s ease-out forwards;
+            /* REMOVED: The long animation-delay that was causing the website to be stuck */
+        }
+
+        @keyframes dramatic-text-fade {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* NEW: Hover Effect for Service Images */
+        .service-image {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transform-origin: center center;
+        }
+
+        .service-image-container:hover .service-image {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-[var(--light-bg)] text-gray-900">
+
+    <div id="splash-screen" class="is-visible">
+        <h1 class="splash-text">Ready to transform your school's technology?</h1>
+    </div>
+
+    <header id="main-header" class="shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-center items-center rounded-b-xl relative">
+            <a href="new.html" class="text-2xl font-bold text-gray-900 transition duration-300 absolute left-6 top-1/2 -translate-y-1/2 font-heading">
+                <img id="header-logo" src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300">
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="new.html#services" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300 flex items-center"> IT Service </a>
+                <a href="#" id="energy-link" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300">Energy</a>
+                <a href="schools.html" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300 active">Schools</a>
+                <a href="new.html#about" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300">About Us</a>
+                <a href="new.html#contact-us" class="header-link text-gray-900 hover:text-[var(--accent-red)] font-medium transition duration-300">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="schools-hero" class="py-16 md:py-24 parallax-section">
+            <div class="parallax-bg"></div>
+            <div class="container mx-auto px-6 text-center relative z-10 text-white hero-content">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight font-heading">
+                    Elaka IT <span class="dramatic-word text-[var(--accent-red)]">class room</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 0.3s;">technology</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 0.6s;">lets</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 0.9s;">your</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 1.2s;">school</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 1.5s;">focus</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 1.8s;">on</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 2.1s;">the</span> <span class="dramatic-word text-[var(--accent-red)]" style="animation-delay: 2.4s;">day</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 animate-on-scroll">
+                    End to End IT management that keeps your systems up and your school running.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#solutions-intro" id="explore-services-btn" class="inline-block py-3 px-8 border-2 border-white text-white rounded-full font-semibold transition-colors duration-300 hover:bg-white hover:text-[var(--accent-red)] animate-on-scroll">
+                        Explore Services
+                    </a>
+                    <a href="#contact-us" id="talk-to-us-btn" class="inline-block py-3 px-8 bg-[var(--accent-red)] text-white rounded-full font-semibold transition-colors duration-300 hover:bg-red-700 animate-on-scroll">
+                        Talk to Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="solutions-intro" class="py-16 md:py-24 bg-white animate-on-scroll">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-heading">Built around Your School needs</h2>
+                <p class="text-center text-gray-700 mb-12 max-w-2xl mx-auto animate-on-scroll">
+                    Choose individual services or combine them to create a tailored package that fits your school's needs and budget. Our core services include
+                </p>
+            </div>
+        </section>
+
+        <section id="services" class="container mx-auto px-6 mb-16 space-y-12 animate-on-scroll">
+
+            <div class="bg-white p-8 rounded-lg shadow-xl flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8">
+                <div class="w-full md:w-1/2 service-image-container">
+                    <img src="./images/schools-network.jpg" alt="Network and Connectivity" class="rounded-lg h-96 w-full object-cover service-image">
+                </div>
+                <div class="w-full md:w-1/2 space-y-4">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900 font-heading">
+                        Network and Connectivity
+                    </h3>
+                    <h4 class="text-xl font-bold text-gray-600">What’s included:</h4>
+                    <ul class="text-gray-700 space-y-4">
+                        <li>
+                            <p class="font-semibold">Server management and 24/7 monitoring</p>
+                            <p class="text-sm">Managing on-premises and hybrid servers, keeping them secure, reliable and performing as intended, with round-the-clock monitoring.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Wi-Fi and internet management</p>
+                            <p class="text-sm">Deploying and maintaining school-wide networks, troubleshooting connectivity issues and optimising bandwidth.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Data backup and disaster recovery</p>
+                            <p class="text-sm">Implementing secure onsite and cloud-based backups, enabling rapid recovery and protection against data loss.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-xl flex flex-col md:flex-row-reverse items-center space-y-8 md:space-y-0 md:space-x-reverse md:space-x-8">
+                <div class="w-full md:w-1/2 service-image-container">
+                    <img src="./images/schools-devices.jpg" alt="Devices and Software" class="rounded-lg h-96 w-full object-cover service-image">
+                </div>
+                <div class="w-full md:w-1/2 space-y-4">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900 font-heading">
+                        Devices and Software
+                    </h3>
+                    <h4 class="text-xl font-bold text-gray-600">What’s included:</h4>
+                    <ul class="text-gray-700 space-y-4">
+                        <li>
+                            <p class="font-semibold">Hardware and software support</p>
+                            <p class="text-sm">Providing expert technical support for all your school's devices, software and IT systems.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Device lifecycle management</p>
+                            <p class="text-sm">Managing the entire lifecycle of all devices, from procurement, deployment and maintenance to end-of-life disposal.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Endpoint security</p>
+                            <p class="text-sm">Protecting all school devices and systems from external and internal threats.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-xl flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8">
+                <div class="w-full md:w-1/2 service-image-container">
+                    <img src="./images/schools-support.jpg" alt="IT Support" class="rounded-lg h-96 w-full object-cover service-image">
+                </div>
+                <div class="w-full md:w-1/2 space-y-4">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900 font-heading">
+                        IT Support
+                    </h3>
+                    <h4 class="text-xl font-bold text-gray-600">What’s included:</h4>
+                    <ul class="text-gray-700 space-y-4">
+                        <li>
+                            <p class="font-semibold">End-user support</p>
+                            <p class="text-sm">Providing on-site and remote IT support to your school's teachers, students and staff.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Help desk and ticketing system</p>
+                            <p class="text-sm">Offering a dedicated IT help desk and ticketing system to ensure all technical issues are addressed in a timely manner.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Preventative maintenance</p>
+                            <p class="text-sm">Proactively managing and maintaining your school's IT systems and infrastructure to ensure they perform optimally.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-white p-8 rounded-lg shadow-xl flex flex-col md:flex-row-reverse items-center space-y-8 md:space-y-0 md:space-x-reverse md:space-x-8">
+                <div class="w-full md:w-1/2 service-image-container">
+                    <img src="./images/schools-strategy.jpg" alt="IT Strategy and Leadership" class="rounded-lg h-96 w-full object-cover service-image">
+                </div>
+                <div class="w-full md:w-1/2 space-y-4">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-900 font-heading">
+                        IT Strategy and Leadership
+                    </h3>
+                    <h4 class="text-xl font-bold text-gray-600">What’s included:</h4>
+                    <ul class="text-gray-700 space-y-4">
+                        <li>
+                            <p class="font-semibold">Strategic planning</p>
+                            <p class="text-sm">Collaborating with your school's leadership to create a long-term IT roadmap that aligns with your educational goals.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Budgeting and procurement</p>
+                            <p class="text-sm">Helping you make informed decisions when it comes to technology investments and managing your IT budget.</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Security and compliance</p>
+                            <p class="text-sm">Ensuring your school's IT systems and practices meet all relevant security standards and educational regulations.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="contact-us" class="py-16 md:py-24 bg-[var(--light-bg)] text-center animate-on-scroll">
+            <div class="container mx-auto px-6 max-w-2xl form-gradient-border">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4 font-heading">
+                    Talk to Us
+                </h2>
+                <p class="text-gray-700 mb-8">
+                    Let's discuss how we can help your school thrive with modern IT solutions.
+                </p>
+                <form action="#" method="POST" class="space-y-6">
+                    <input type="text" name="name" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)] transition duration-300" required>
+                    <input type="email" name="email" placeholder="Your Email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)] transition duration-300" required>
+                    <textarea name="message" rows="4" placeholder="Your Message" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)] transition duration-300" required></textarea>
+                    <button type="submit" class="w-full py-3 px-6 bg-[var(--accent-red)] text-white font-semibold rounded-md hover:bg-red-700 transition duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const heroContent = document.querySelector('.hero-content');
+            const splashScreen = document.getElementById('splash-screen');
+            const splashText = document.querySelector('.splash-text');
+            const exploreBtn = document.getElementById('explore-services-btn');
+            const talkBtn = document.getElementById('talk-to-us-btn');
+            const contactSectionContent = document.querySelector('#contact-us .form-gradient-border');
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Splash screen functionality
+            if (splashScreen && splashText) {
+                // Initial state
+                splashScreen.classList.add('is-visible');
+
+                // Start the splash screen fade out after a delay
+                setTimeout(() => {
+                    splashScreen.classList.add('fade-out');
+                    document.body.style.overflow = 'auto'; // Re-enable scrolling
+                }, 1500); // Wait for 1.5 seconds
+            }
+
+            // Word-by-word animation for hero heading
+            const heroHeading = document.querySelector('#schools-hero h1');
+            if (heroHeading) {
+                const words = heroHeading.innerText.split(' ');
+                heroHeading.innerHTML = '';
+                words.forEach((word, index) => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.innerText = word + ' ';
+                    wordSpan.classList.add('dramatic-word');
+                    wordSpan.style.animationDelay = `${(index * 0.3) + 0.5}s`; // Stagger animation
+                    heroHeading.appendChild(wordSpan);
+                });
+            }
+
+            // Animate elements on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(element => {
+                observer.observe(element);
+            });
+
+            // Button animations
+            if (exploreBtn) {
+                exploreBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    heroContent.classList.add('is-burning');
+                    exploreBtn.classList.add('is-burning');
+
+                    setTimeout(() => {
+                        document.getElementById('solutions-intro').scrollIntoView({ behavior: 'smooth' });
+                    }, 3500);
+                });
+            }
+            
+            if (talkBtn) {
+                talkBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    heroContent.classList.add('is-misting');
+                    talkBtn.classList.add('is-misting');
+
+                    setTimeout(() => {
+                        contactSectionContent.scrollIntoView({ behavior: 'smooth' });
+                    }, 3500);
+                });
+            }
+
+            // Intersection Observer to reset hero content when it comes back into view
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Check if the hero section is intersecting and not the first time on page load
+                    if (entry.isIntersecting && window.scrollY > 0) {
+                        heroContent.classList.remove('is-burning', 'is-misting');
+                        exploreBtn.classList.remove('is-burning');
+                        talkBtn.classList.remove('is-misting');
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            const heroSection = document.getElementById('schools-hero');
+            if (heroSection) {
+                heroObserver.observe(heroSection);
+            }
+        });
+    </script>
+</body>
+</html>

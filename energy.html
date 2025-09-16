@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELAKA POWER - Clean and Smart Energy</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* This is the new style based on new.html's design language */
+
+        /* --- Global Styles & Variables --- */
+        :root {
+            --accent-color: #4CAF50; /* A vibrant green to match the red in new.html */
+            --light-color: #ffffff;
+            --dark-color: #2c3e50;
+            --text-color: #34495e;
+            --light-bg: #F5F5F5;
+
+            /* New Fonts */
+            --heading-font: 'Karla', sans-serif;
+            --body-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            font-weight: 700;
+            font-family: var(--heading-font);
+        }
+
+        h1 { font-size: 3.5rem; color: var(--light-color); }
+        h2 { font-size: 2.5rem; color: var(--dark-color); margin-bottom: 1rem; text-align: center; }
+        h3 { font-size: 1.5rem; color: var(--dark-color); margin-bottom: 0.5rem;}
+        h4 { font-size: 1.1rem; }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .citation {
+            font-size: 0.7rem;
+            color: #95a5a6;
+            vertical-align: super;
+            display: inline-block;
+            margin-left: 2px;
+        }
+
+        /* --- Header & Navigation --- */
+        #main-header {
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            background-size: 200% 200%;
+            transition: background 0.4s ease-out, box-shadow 0.4s ease-out, transform 0.4s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: header-gradient-cycle 15s ease infinite alternate;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #main-header.scrolled {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: none; 
+        }
+
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--light-color);
+            transition: color 0.3s ease;
+        }
+
+        #main-header.scrolled .logo {
+            color: var(--dark-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            padding: 0 15px;
+        }
+
+        .header-link {
+            color: var(--light-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        #main-header.scrolled .header-link {
+            color: var(--text-color);
+        }
+
+        .header-link::after {
+            content: '';
+            position: absolute;
+            top: -0.5rem;
+            left: -1rem;
+            right: -1rem;
+            bottom: -0.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        #main-header.scrolled .header-link::after {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .header-link:hover::after {
+            transform: scale(1);
+        }
+        
+        .header-link:hover {
+            color: white;
+        }
+
+        #main-header.scrolled .header-link:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-btn { display: none; } /* For mobile */
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 70px; 
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h3 {
+            font-size: 1.2rem;
+            color: var(--light-color);
+            font-weight: 400;
+            margin: 1rem 0 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            color: var(--light-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: breathing-gradient 5s ease-in-out infinite alternate;
+            background-size: 200% 200%;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4), 0 6px 6px rgba(76, 175, 80, 0.2);
+        }
+
+        /* --- Info Cards --- */
+        .info-cards {
+            position: absolute;
+            bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .info-cards .card {
+            position: relative;
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            color: var(--dark-color);
+            text-align: left;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .info-cards .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #A8E063, #56AB2F);
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        .info-cards .card p {
+            font-size: 0.9rem;
+        }
+        .info-cards .card .citation {
+            color: #bdc3c7;
+        }
+
+        /* --- Solutions Section --- */
+        .solutions-section {
+            padding: 60px 20px;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .solution-item {
+            position: relative;
+            background: var(--light-color);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .solution-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #A8E063, #56AB2F);
+            border-radius: 8px;
+            z-index: -1;
+        }
+
+        .solution-item ul {
+            list-style-position: inside;
+            padding-left: 5px;
+        }
+        .solution-item li {
+            margin-bottom: 10px;
+        }
+
+        /* --- About & CTA Sections --- */
+        .about-section, .cta-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-section {
+            background: #f9f9f9;
+        }
+        .about-section p, .cta-section p {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .cta-section {
+            background: var(--dark-color);
+            color: var(--light-color);
+        }
+        .cta-section h2 {
+            color: var(--light-color);
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            background: #1a1a1a;
+            color: #bdc3c7;
+            padding-top: 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding-bottom: 40px;
+            border-top: 1px solid #34495e;
+            margin-top: 40px;
+            padding-top: 40px;
+        }
+        .footer-col h4 {
+            color: var(--light-color);
+            margin-bottom: 15px;
+        }
+        .footer-col p, .footer-col li {
+            font-size: 0.9rem;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col li a {
+            color: #bdc3c7;
+            transition: color 0.3s ease;
+        }
+        .footer-col li a:hover {
+            color: var(--light-color);
+        }
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.8rem;
+        }
+        
+        .footer-grid .footer-col:first-child .logo {
+            color: var(--light-color);
+        }
+
+        /* --- Animations & Keyframes --- */
+        @keyframes header-gradient-cycle {
+            0% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(to right, #4CAF50, #8BC34A);
+            }
+            33% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(to right, #66BB6A, #4CAF50);
+            }
+            66% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(to right, #A8E063, #56AB2F);
+            }
+            100% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(to right, #4CAF50, #8BC34A);
+            }
+        }
+        
+        @keyframes slide-up-fade {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+        }
+
+        .animate-on-scroll.is-visible {
+            animation: slide-up-fade 1s ease-out forwards;
+        }
+
+        @keyframes breathing-gradient {
+            0% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(45deg, #4CAF50, #66BB6A, #8BC34A);
+            }
+            50% {
+                background-position: 100% 50%;
+                background-image: linear-gradient(45deg, #8BC34A, #66BB6A, #4CAF50);
+            }
+            100% {
+                background-position: 0% 50%;
+                background-image: linear-gradient(45deg, #4CAF50, #66BB6A, #8BC34A);
+            }
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            .info-cards { position: static; grid-template-columns: 1fr; padding: 30px 20px; }
+            .hero { height: auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-btn { display: block; background: var(--accent-color); color: white; border: none; padding: 10px; border-radius: 5px; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 2rem; }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <nav class="container">
+            <a href="#" class="logo">ELAKA POWER</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="header-link">Home</a></li>
+                <li><a href="#solutions" class="header-link">Solutions</a></li>
+                <li><a href="#about" class="header-link">About Us</a></li>
+                <li><a href="#contact" class="header-link">Contact</a></li>
+            </ul>
+            <button class="menu-btn">Open Menu</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content container">
+                <h1>Clean and smart energy for your business.</h1>
+                <h3>Sustainable energy solutions made easy, reliable, and tailor-made for you.</h3>
+                <a href="#contact" class="cta-button">Let's Talk Energy Solutions &gt;</a>
+            </div>
+            <div class="info-cards container">
+                <div class="card">
+                    <h4>⚡ Sustainability</h4>
+                    <p>Primarily using renewable energy sources, our microgrids support your grid independence and help reduce carbon emissions.</p>
+                </div>
+                <div class="card">
+                    <h4>🔒 Resiliency</h4>
+                    <p>Our microgrids provide uninterrupted 24/7 power. They also balance load demands to meet your changing power needs.</p>
+                </div>
+                <div class="card">
+                    <h4>⚙️ Efficiency</h4>
+                    <p>With sophisticated controls, you can optimize power usage based on demand, energy prices, and other factors.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solutions" class="solutions-section container animate-on-scroll">
+            <h2>A Full Portfolio of Cutting-Edge Solutions</h2>
+            <p class="section-intro">Take a sustainable approach to energy that goes beyond the use of renewable sources. Get the most out of your system with our full portfolio of products, solutions, and services.</p>
+            
+            <div class="solutions-grid">
+                <article class="solution-item">
+                    <h3>Microgrids</h3>
+                    <p>Microgrids put you in control of the energy transition.</p>
+                    <ul>
+                        <li>Serve as a decentralized energy system, where you are independent of the public network.</li>
+                        <li>Generate additional revenue by feeding any excess energy back to the grid.</li>
+                        <li>Balance load demands through intelligent management.</li>
+                        <li>Integrated back-up systems provide peace of mind with failsafe operation.</li>
+                    </ul>
+                </article>
+
+                <article class="solution-item">
+                    <h3>Solar Panels</h3>
+                    <p>Invest in Renewable Solar Energy Solutions.</p>
+                    <ul>
+                        <li>Our experienced team will create the perfect solution for your residential and commercial requirements.</li>
+                        <li>We design, install, and maintain solar systems that are safe, legal, and can protect you during grid outages.</li>
+                        <li>We stock top-quality photovoltaic module products and accessories.</li>
+                    </ul>
+                </article>
+
+                <article class="solution-item">
+                    <h3>UPS Solutions</h3>
+                    <p>Our UPS solutions provide protection from power surges and interruptions.</p>
+                    <ul>
+                        <li><strong>Single-phase:</strong> Provides power protection for electronic equipment, guarding against voltage fluctuations and outages. Suitable for residential, commercial, and light industrial applications.</li>
+                        <li><strong>3-phase Modular:</strong> Delivers high efficiency and reliability with a modular architecture. Ideal for larger applications like Data Centers.</li>
+                        <li><strong>Rack Based:</strong> Provides reliable backup power for data centers and ensures uninterrupted operations during power source transitions.</li>
+                    </ul>
+                </article>
+
+                <article class="solution-item">
+                    <h3>Solar Inverters</h3>
+                    <p>Tried and tested solar inverters designed for residential or commercial applications.</p>
+                    <ul>
+                        <li><strong>Hybrid Inverters:</strong> Combine grid-tied and off-grid functions. They can connect to the grid to feed back excess power or use stored power during outages.</li>
+                        <li><strong>Off-Grid Inverters:</strong> Operate as stand-alone systems, allowing you to generate and store your own electricity.</li>
+                    </ul>
+                </article>
+
+                <article class="solution-item">
+                    <h3>Battery Storage </h3>
+                    <ul>
+                        <li><strong>Lithium Batteries:</strong> The preferred storage technology for a reliable supply of renewable energy. Ideal for industrial, commercial, and residential use.</li>
+                        <li><strong>AGM Batteries:</strong> Advanced, maintenance-free, sealed, and spill-free lead-acid batteries. Ideal for solar backup due to low self-discharge and long lifespan.</li>
+                        <li><strong>Lead-acid Batteries:</strong> Durable, reliable, and deliver high power output. They are generally less expensive than other types.</li>
+                    </ul>
+                </article>
+
+                <article class="solution-item">
+                    <h3>Power Management</h3>
+                    <ul>
+                        <li><strong>Power Distribution Units (PDUs):</strong> Allow for reliable distribution, protection, and management of power to multiple devices in Data Center environments.</li>
+                        <li><strong>Automatic Transfer Switches (ATS):</strong> Ensure continuous delivery of electrical power from one of two sources. When the main source fails, the ATS switches to the backup source to prevent downtime.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="about" class="about-section animate-on-scroll">
+            <div class="container">
+                <h2>Empowering Your Energy Independence</h2>
+                <p>At <strong>ELAKA POWER</strong>, we believe in putting you in control of the energy transition. We are dedicated to providing sustainable energy solutions that go beyond just using renewable sources. Our experienced team of consultants and certified installers will create the perfect solution for all your residential and commercial solar power requirements. We have the necessary training and skill to design, install, and maintain solar systems that are safe, legal, and can protect you during grid outages and load-shedding events.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section animate-on-scroll">
+            <div class="container">
+                <h2>Ready to Break Free?</h2>
+                <p>Ready to break free from municipal utility grids and embrace sustainable living? Whether for your home, data center, or industrial manufacturing environment, our team is ready to create the perfect solution for your power requirements.</p>
+                <a href="mailto:sales@elakapower.com" class="cta-button">Contact Our Team to Get Started &gt;</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer animate-on-scroll">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>ELAKA POWER</h4>
+                    <p>Microgrids put you in control of the energy transition. Small scale. Big impact.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#solutions">Microgrids</a></li>
+                        <li><a href="#solutions">Solar Panels</a></li>
+                        <li><a href="#solutions">UPS Solutions</a></li>
+                        <li><a href="#solutions">Solar Inverters</a></li>
+                        <li><a href="#solutions">Battery Storage</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <p>
+                        123 Power Lane<br>
+                        Kampala, Uganda<br>
+                        Email: contact@elakapower.com<br>
+                        Phone: +256 123 456789
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ELAKA POWER. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Header Scroll Effect
+            const header = document.getElementById('main-header');
+            
+            function updateHeader() {
+                const scrollY = window.scrollY;
+                if (scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', updateHeader);
+
+            // Scroll Animation for sections
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 
+            });
+
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
