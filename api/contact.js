@@ -1,53 +1,52 @@
-// Serverless Function for Contact Form
-// Deploy this to Netlify Functions or Vercel
+// Vercel Serverless Function for Contact Form
+// This file should be in /api/contact.js
 
 const nodemailer = require('nodemailer');
 
-exports.handler = async (event, context) => {
+module.exports = async (req, res) => {
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Handle preflight request
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
     // Only allow POST
-    if (event.httpMethod !== 'POST') {
-        return {
-            statusCode: 405,
-            body: JSON.stringify({ message: 'Method Not Allowed' })
-        };
+    if (req.method !== 'POST') {
+        return res.status(405).json({ message: 'Method Not Allowed' });
     }
 
     try {
-        const data = JSON.parse(event.body);
-        const { name, email, phone, company, message, service } = data;
+        const { name, email, phone, company, message, service } = req.body;
 
         // Validate input
         if (!name || !email || !message) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ 
-                    success: false, 
-                    message: 'Name, email, and message are required' 
-                })
-            };
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Name, email, and message are required' 
+            });
         }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ 
-                    success: false, 
-                    message: 'Invalid email address' 
-                })
-            };
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Invalid email address' 
+            });
         }
 
         // Configure email transporter
-        // For production, use environment variables for credentials
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST || 'smtp.gmail.com',
             port: process.env.SMTP_PORT || 587,
             secure: false,
             auth: {
-                user: process.env.SMTP_USER, // Your email
-                pass: process.env.SMTP_PASS  // Your email password or app password
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS
             }
         });
 
@@ -110,28 +109,16 @@ exports.handler = async (event, context) => {
         await transporter.sendMail(companyMailOptions);
         await transporter.sendMail(customerMailOptions);
 
-        return {
-            statusCode: 200,
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            body: JSON.stringify({ 
-                success: true, 
-                message: 'Thank you! Your message has been sent successfully.' 
-            })
-        };
+        return res.status(200).json({ 
+            success: true, 
+            message: 'Thank you! Your message has been sent successfully.' 
+        });
 
     } catch (error) {
         console.error('Error:', error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ 
-                success: false, 
-                message: 'An error occurred. Please try again later.' 
-            })
-        };
+        return res.status(500).json({ 
+            success: false, 
+            message: 'An error occurred. Please try again later.' 
+        });
     }
 };
-
-
