@@ -64,6 +64,12 @@
             <a href="new.html" class="text-2xl font-bold transition duration-300 absolute left-6 top-1/2 -translate-y-1/2 font-heading">
                 <img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16">
             </a>
+
+            <!-- Mobile menu button (absolute right) -->
+            <button id="mobile-menu-button" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 absolute right-6 top-1/2 -translate-y-1/2" aria-label="Open menu">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+
             <nav class="hidden md:flex space-x-8">
                 <div class="relative group">
                     <a href="new.html#services" class="header-link text-gray-900 hover:text-[var(--accent-primary)] font-medium transition duration-300 flex items-center">IT Service</a>
@@ -101,6 +107,22 @@
                 <a href="new.html#about" class="header-link text-gray-900 hover:text-[var(--accent-primary)] font-medium transition duration-300">About Us</a>
                 <a href="new.html#contact-us" class="header-link text-gray-900 hover:text-[var(--accent-primary)] font-medium transition duration-300">Contact Us</a>
             </nav>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
+            <div class="px-6 py-4 space-y-4">
+                <a href="new.html#services" class="block header-link">IT Service</a>
+                <div class="pl-4 space-y-1">
+                    <a href="microsoft-cloud.html" class="block text-sm text-gray-600">Microsoft Cloud</a>
+                    <a href="digitalization.html" class="block text-sm text-gray-600">Digitalization & IT</a>
+                    <a href="cybersecurity.html" class="block text-sm text-gray-600">Cybersecurity</a>
+                </div>
+                <a href="energy.html" class="block header-link">Energy</a>
+                <a href="schools.html" class="block header-link">Schools</a>
+                <a href="new.html#about" class="block header-link">About Us</a>
+                <a href="new.html#contact-us" class="block header-link">Contact Us</a>
+            </div>
         </div>
     </header>
 
@@ -225,6 +247,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
             const scrollProgress = document.getElementById('scroll-progress');
             window.addEventListener('scroll', () => {
                 const progress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
