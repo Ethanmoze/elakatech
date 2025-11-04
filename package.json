@@ -1,0 +1,27 @@
+{
+  "name": "elaka-technologies-website",
+  "version": "1.0.0",
+  "description": "Elaka Technologies - Enterprise IT Solutions",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx live-server",
+    "build": "echo 'Build complete'",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "IT Solutions",
+    "Microsoft Cloud",
+    "Cybersecurity",
+    "Digital Transformation"
+  ],
+  "author": "Elaka Technologies",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
+
+

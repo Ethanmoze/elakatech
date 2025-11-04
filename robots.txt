@@ -1,0 +1,26 @@
+# robots.txt for Elaka Technologies
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://elakatechnologies.com/sitemap.xml
+
+# Disallow specific paths (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+

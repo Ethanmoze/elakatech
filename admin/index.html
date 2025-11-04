@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaka Technologies - CMS Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F9FAFB;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Login Screen (shows initially) -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Elaka CMS Admin</h1>
+                <p class="text-gray-600">Content Management System</p>
+            </div>
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                    <input type="text" id="username" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
+                    Login
+                </button>
+                <p id="login-error" class="text-red-500 text-sm text-center hidden">Invalid credentials</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (hidden initially) -->
+    <div id="admin-dashboard" class="hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="flex items-center justify-between px-8 py-4">
+                <h1 class="text-2xl font-bold text-gray-800">Elaka CMS Dashboard</h1>
+                <button id="logout-btn" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="bg-white border-b">
+            <div class="flex space-x-1 px-8">
+                <button class="tab-btn active px-6 py-3 font-medium text-purple-600 border-b-2 border-purple-600" data-tab="services">Services</button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-purple-600" data-tab="clients">Client Logos</button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-purple-600" data-tab="testimonials">Testimonials</button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-purple-600" data-tab="content">Page Content</button>
+                <button class="tab-btn px-6 py-3 font-medium text-gray-600 hover:text-purple-600" data-tab="submissions">Form Submissions</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="p-8">
+            <!-- Services Management -->
+            <div id="services-tab" class="tab-content">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Manage Services</h2>
+                        <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Add Service</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">Microsoft Cloud Solutions</h3>
+                                    <p class="text-gray-600 mt-2">Enterprise cloud solutions...</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</button>
+                                    <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Logos Management -->
+            <div id="clients-tab" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Manage Client Logos</h2>
+                        <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Upload Logo</button>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition">
+                            <div class="w-full h-24 bg-gray-100 rounded flex items-center justify-center mb-2">
+                                <span class="text-gray-400">Logo Preview</span>
+                            </div>
+                            <button class="text-sm text-red-500 hover:text-red-700">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Submissions -->
+            <div id="submissions-tab" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Contact Form Submissions</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Date</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Service</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-3 text-sm text-gray-600">Oct 21, 2025</td>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-800">John Doe</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">john@example.com</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">Microsoft Cloud</td>
+                                    <td class="px-4 py-3"><span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">New</span></td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other tabs content (Testimonials, Page Content) -->
+            <div id="testimonials-tab" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Manage Testimonials</h2>
+                    <p class="text-gray-600">Testimonials management coming soon...</p>
+                </div>
+            </div>
+
+            <div id="content-tab" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Page Content</h2>
+                    <p class="text-gray-600">Page content editor coming soon...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple authentication (in production, use proper backend authentication)
+        const DEFAULT_USERNAME = 'admin';
+        const DEFAULT_PASSWORD = 'elaka2025'; // CHANGE THIS IN PRODUCTION
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === DEFAULT_USERNAME && password === DEFAULT_PASSWORD) {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                sessionStorage.setItem('isLoggedIn', 'true');
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        });
+
+        // Check if already logged in
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('admin-dashboard').classList.remove('hidden');
+        }
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            sessionStorage.removeItem('isLoggedIn');
+            location.reload();
+        });
+
+        // Tab navigation
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active', 'text-purple-600', 'border-b-2', 'border-purple-600');
+                    b.classList.add('text-gray-600');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active', 'text-purple-600', 'border-b-2', 'border-purple-600');
+                this.classList.remove('text-gray-600');
+                
+                // Hide all tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Show selected tab content
+                const tabId = this.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
+
+
