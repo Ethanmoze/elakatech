@@ -12,9 +12,9 @@
         <priority>1.0</priority>
     </url>
 
-    <!-- Main Homepage -->
+    <!-- Main Homepage (explicit index) -->
     <url>
-        <loc>https://elakatechnologies.com/new.html</loc>
+        <loc>https://elakatechnologies.com/index.html</loc>
         <lastmod>2025-10-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
