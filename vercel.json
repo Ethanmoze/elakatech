@@ -12,11 +12,19 @@
       "dest": "/api/contact.js"
     },
     {
+      "src": "^/$",
+      "dest": "/index.html"
+    },
+    {
       "src": "/(.*\\..*)",
       "dest": "/$1"
     },
     {
       "handle": "filesystem"
+    },
+    {
+      "src": "^/new.html$",
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
