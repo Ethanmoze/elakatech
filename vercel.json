@@ -1,34 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/contact.js",
-      "use": "@vercel/node"
-    }
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" }
   ],
-  "routes": [
-    {
-      "src": "/api/contact",
-      "dest": "/api/contact.js"
-    },
-    {
-      "src": "^/$",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*\\..*)",
-      "dest": "/$1"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "^/new.html$",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1.html"
-    }
+  "redirects": [
+    { "source": "/new.html", "destination": "/", "permanent": true }
   ]
 }
