@@ -17,6 +17,19 @@
 			font-display: swap;
 		}
 
+		/* Make hero title bold white and larger specifically in Energy hero */
+		.hero h1 {
+			background: none !important;
+			-webkit-text-fill-color: #FFFFFF !important;
+			color: #FFFFFF !important;
+			font-weight: 900;
+			font-size: clamp(3rem, 8vw, 6rem);
+		}
+		.hero h1 .text-accent {
+			color: #FFFFFF !important;
+			-webkit-text-fill-color: #FFFFFF !important;
+		}
+
 		@font-face {
 			font-family: 'Formular';
 			src: url('./fonts/formular-regular.otf') format('opentype');
@@ -51,6 +64,8 @@
 		html {
 			scroll-behavior: smooth;
 			overflow-x: hidden;
+			-webkit-text-size-adjust: 100%;
+			text-size-adjust: 100%;
 		}
 
 		body {
@@ -60,6 +75,8 @@
 			overflow-x: hidden;
 			position: relative;
 			line-height: 1.7;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
 		}
 
 		/* Typography Excellence */
@@ -109,8 +126,8 @@
 			top: 0;
 			z-index: 1000;
 			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(20px);
 			-webkit-backdrop-filter: blur(20px);
+			backdrop-filter: blur(20px);
 			border-bottom: 1px solid var(--border-glass);
 			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 			transition: all 0.3s ease;
@@ -241,8 +258,8 @@
 			background: var(--surface-glass);
 			border: 1px solid var(--border-glass);
 			border-radius: 50px;
-			backdrop-filter: blur(10px);
 			-webkit-backdrop-filter: blur(10px);
+			backdrop-filter: blur(10px);
 		}
 
 		/* Premium Hero Section */
@@ -269,8 +286,8 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			height: 200px;
-			background: linear-gradient(to top, var(--bg-primary), transparent);
+			height: 0;
+			background: none;
 			pointer-events: none;
 			z-index: 2;
 		}
@@ -303,8 +320,8 @@
 
 		.service-card-item {
 			background: var(--surface-glass);
-			backdrop-filter: blur(20px);
 			-webkit-backdrop-filter: blur(20px);
+			backdrop-filter: blur(20px);
 			border: 1px solid var(--border-glass);
 			border-radius: 32px;
 			padding: 60px 40px;
@@ -397,8 +414,8 @@
 		.form-gradient-border {
 			position: relative;
 			background: var(--surface-glass);
-			backdrop-filter: blur(30px);
 			-webkit-backdrop-filter: blur(30px);
+			backdrop-filter: blur(30px);
 			border: 1px solid var(--border-glass);
 			border-radius: 32px;
 			padding: 60px 50px;
@@ -481,15 +498,14 @@
 
 		/* Responsive */
 		@media (max-width: 768px) {
-			h1 { font-size: 2.5rem; }
-			h2 { font-size: 2rem; }
-			.glass-card, .service-card-item, .form-gradient-border {
-				padding: 40px 24px;
-			}
-			.btn-primary, .btn-secondary {
-				padding: 14px 32px;
-				font-size: 16px;
-			}
+			h1 { font-size: 2.5rem; letter-spacing: -0.02em; }
+			h2 { font-size: 1.75rem; }
+			p { font-size: 1.05rem; line-height: 1.8; }
+			.glass-card, .service-card-item, .form-gradient-border { padding: 36px 22px; }
+			.btn-primary, .btn-secondary { padding: 12px 28px; font-size: 15px; }
+			.hero { min-height: 75vh; }
+			/* Hide decorative blurred blobs on mobile */
+			.hero .filter.blur-3xl { display: none; }
 		}
 	</style>
 </head>
@@ -501,7 +517,7 @@
 	<header id="main-header">
 		<div class="container mx-auto px-6 py-4 flex justify-center items-center relative">
 			<a href="index.html" class="text-2xl font-bold transition duration-300 absolute left-6 top-1/2 -translate-y-1/2 font-heading">
-				<img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300">
+				<img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300" loading="lazy" decoding="async">
 			</a>
 			<nav class="hidden md:flex space-x-8">
 				<div class="relative group">
@@ -543,7 +559,7 @@
 			</nav>
 
 			<!-- Mobile hamburger -->
-			<button id="hamburger-btn" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-white/50">
+			<button id="hamburger-btn" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-white/50" aria-label="Open menu">
 				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 						  d="M4 6h16M4 12h16M4 18h16"/>
@@ -582,7 +598,7 @@
 					<h1 class="font-heading mb-8" style="animation-delay: 0.1s;">
 						POWERING A <span class="text-accent">GREENER FUTURE</span>
 					</h1>
-					<p class="text-xl md:text-2xl max-w-3xl mx-auto mb-12 animate-on-scroll" style="color: var(--text-secondary); animation-delay: 0.3s;">
+					<p class="text-xl md:text-2xl max-w-3xl mx-auto mb-12 animate-on-scroll" style="color: #FFFFFF; animation-delay: 0.3s;">
 						Innovative and reliable smart energy solutions for sustainable growth.
 					</p>
 					<a href="#energy-services" class="btn-primary inline-block animate-on-scroll" style="animation-delay: 0.5s;">
@@ -616,8 +632,8 @@
 					</div>
 					<div class="service-image-container">
 						<div class="image-gallery">
-							<img src="./images/ups-rack.jpg" alt="Rack Mounted UPS" class="object-cover">
-							<img src="./images/ups-modular.jpg" alt="Modular 3-Phase UPS" class="object-cover">
+							<img src="./images/ups-rack.jpg" alt="Rack Mounted UPS" class="object-cover" loading="lazy" decoding="async">
+							<img src="./images/ups-modular.jpg" alt="Modular 3-Phase UPS" class="object-cover" loading="lazy" decoding="async">
 						</div>
 					</div>
 				</div>
@@ -635,8 +651,8 @@
 					</div>
 					<div class="service-image-container">
 						<div class="image-gallery">
-							<img src="./images/solar-rooftop.jpg" alt="Commercial Solar Rooftop Installation" class="object-cover">
-							<img src="./images/inverter-hybrid.png" alt="Hybrid Inverter System" class="object-cover">
+							<img src="./images/solar-rooftop.jpg" alt="Commercial Solar Rooftop Installation" class="object-cover" loading="lazy" decoding="async">
+							<img src="./images/inverter-hybrid.png" alt="Hybrid Inverter System" class="object-cover" loading="lazy" decoding="async">
 						</div>
 					</div>
 				</div>
@@ -653,8 +669,8 @@
 					</div>
 					<div class="service-image-container">
 						<div class="image-gallery">
-							<img src="./images/battery-lifepo4.jpg" alt="Residential Lithium Battery Storage" class="object-cover">
-							<img src="./images/battery-agm-bank.png" alt="AGM Deep Cycle Battery Bank" class="object-cover">
+							<img src="./images/battery-lifepo4.jpg" alt="Residential Lithium Battery Storage" class="object-cover" loading="lazy" decoding="async">
+							<img src="./images/battery-agm-bank.png" alt="AGM Deep Cycle Battery Bank" class="object-cover" loading="lazy" decoding="async">
 						</div>
 					</div>
 				</div>
@@ -714,7 +730,7 @@
 	<footer style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 3rem 0;">
 		<div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
 			<div>
-				<img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-12 mx-auto md:mx-0 mb-4" style="filter: brightness(0) invert(1);">
+				<img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-12 mx-auto md:mx-0 mb-4" style="filter: brightness(0) invert(1);" loading="lazy" decoding="async">
 				<p class="text-sm" style="color: #D1D5DB;">East Africa</p>
 				<p class="text-sm" style="color: #D1D5DB;">Branches in Kampala and Gulu, Uganda</p>
 				<p class="text-sm mt-4" style="color: #D1D5DB;">Tel: <a href="tel:0394798603" class="hover:text-green-400 transition-colors" style="color: #D1D5DB;">0394798603</a></p>

@@ -18,18 +18,20 @@
             --glow-primary: rgba(0, 120, 212, 0.15);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
+        html { scroll-behavior: smooth; overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
         body {
             font-family: 'Formular', 'Inter', sans-serif;
             background: #FFFFFF;
             color: var(--text-primary); line-height: 1.7; overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         h1, h2, h3, .font-heading { font-family: 'Karla', sans-serif; font-weight: 700; line-height: 1.2; }
         h1 { font-size: clamp(2.5rem, 6vw, 5rem); background: linear-gradient(135deg, #111827, #374151); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
         
         #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); z-index: 9999; }
-        #main-header { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-glass); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+        #main-header { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-glass); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
         .header-link { color: var(--text-secondary); padding: 8px 16px; font-weight: 600; transition: color 0.3s; text-decoration: none; }
         .header-link:hover { color: var(--text-primary); }
         
@@ -55,7 +57,14 @@
         .animate-on-scroll.is-visible { animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
         
-        @media (max-width: 768px) { .glass-card { padding: 24px; } }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.25rem; letter-spacing: -0.02em; }
+            h2 { font-size: 1.75rem; }
+            p { font-size: 1.05rem; line-height: 1.8; }
+            .glass-card { padding: 24px; }
+            .btn-primary { padding: 12px 28px; font-size: 15px; }
+            .hero { min-height: 75vh; }
+        }
     </style>
 </head>
 <body>
@@ -63,7 +72,7 @@
     <header id="main-header">
         <div class="container mx-auto px-6 py-4 flex justify-center items-center relative">
             <a href="index.html" class="text-2xl font-bold transition duration-300 absolute left-6 top-1/2 -translate-y-1/2 font-heading">
-                <img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300">
+                <img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300" loading="lazy" decoding="async">
             </a>
 
             <!-- Mobile menu button (absolute right) -->
@@ -134,7 +143,7 @@
             <div class="hero-bg"></div>
             <div class="container mx-auto px-6 text-center relative" style="z-index: 3;">
                 <h1 class="font-heading mb-6">Microsoft Cloud Services</h1>
-                <p class="text-xl max-w-3xl mx-auto mb-12" style="color: var(--text-secondary);">Empower your business with Microsoft's enterprise cloud solutions</p>
+                <p class="text-xl max-w-3xl mx-auto mb-12" style="color: #FFFFFF;">Empower your business with Microsoft's enterprise cloud solutions</p>
                 <a href="#services" class="btn-primary">Explore Solutions</a>
             </div>
         </section>
@@ -204,7 +213,7 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 <div>
-                    <img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-14 mb-6" style="filter: brightness(0) invert(1);">
+                    <img src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-14 mb-6" style="filter: brightness(0) invert(1);" loading="lazy" decoding="async">
                     <p class="mb-2" style="color: #D1D5DB;">East Africa</p>
                     <p class="mb-4" style="color: #D1D5DB;">Branches in Kampala and Gulu, Uganda</p>
                     <p class="mb-2">

@@ -93,6 +93,7 @@
         html {
             scroll-behavior: smooth;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -102,6 +103,8 @@
             overflow-x: hidden;
             position: relative;
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Typography Excellence */
@@ -247,8 +250,8 @@
             top: 0;
             z-index: 1000;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-glass);
             transition: all 0.3s ease;
         }
@@ -310,8 +313,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(to top, var(--bg-primary), transparent);
+            height: 0;
+            background: none;
             pointer-events: none;
         }
 
@@ -461,6 +464,13 @@
             background-clip: text;
         }
 
+        /* Force-white text utility for selected hero words */
+        .white-word {
+            background: none !important;
+            -webkit-text-fill-color: #FFFFFF !important;
+            color: #FFFFFF !important;
+        }
+
         /* Floating Animation for Decorative Elements */
         @keyframes float {
             0%, 100% {
@@ -473,6 +483,13 @@
 
         .float-animation {
             animation: float 6s ease-in-out infinite;
+        }
+
+        /* Mobile responsiveness tweaks */
+        @media (max-width: 640px) {
+            .video-hero-container { min-height: 75vh; }
+            .float-animation { display: none; }
+            .logo-carousel-container { padding: 20px 0; }
         }
 
         /* Service Card with Premium Design */
@@ -624,25 +641,14 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-
+            h1 { font-size: 2.25rem; letter-spacing: -0.02em; }
+            h2 { font-size: 1.75rem; }
+            p { font-size: 1.05rem; line-height: 1.8; }
             .glass-card,
             .service-card,
-            .form-gradient-border {
-                padding: 40px 24px;
-            }
-
+            .form-gradient-border { padding: 36px 22px; }
             .btn-primary,
-            .btn-secondary {
-                padding: 14px 32px;
-                font-size: 16px;
-            }
+            .btn-secondary { padding: 12px 28px; font-size: 15px; }
         }
 
         /* Utility Classes */
@@ -744,7 +750,7 @@
     <header id="main-header">
         <div class="container mx-auto px-6 py-4 flex justify-center items-center relative">
             <a href="#home" class="text-2xl font-bold text-gray-900 transition duration-300 absolute left-6 top-1/2 -translate-y-1/2 font-heading">
-                <img id="header-logo" src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300">
+                <img id="header-logo" src="./images/elaka_logo.png" alt="Elaka Tech Logo" class="h-16 transition-filter duration-300" loading="lazy">
             </a>
 
             <!-- Mobile menu button (non-intrusive, absolute right) -->
@@ -813,7 +819,7 @@
     <main class="relative">
         <!-- Premium Hero Section -->
         <section class="video-hero-container">
-            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <video autoplay muted loop playsinline preload="none" class="absolute inset-0 w-full h-full object-cover z-0">
                 <source src="./videos/elaka-video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -826,15 +832,15 @@
             <div class="container mx-auto px-6 text-center relative z-20 hero-content">
                 <div class="max-w-5xl mx-auto">
                     <h1 class="mb-8 font-heading leading-tight" style="font-size: clamp(2.5rem, 7vw, 5rem);">
-                        <span class="animated-word-hero" style="animation-delay: 0.1s;">Building</span>
+                        <span class="animated-word-hero white-word" style="animation-delay: 0.1s;">Building</span>
                         <span class="dramatic-word" style="animation-delay: 0.3s;">Secure</span><span class="animated-word-hero" style="animation-delay: 0.35s;">,</span>
                         <span class="dramatic-word" style="animation-delay: 0.5s;">scalable</span>
                         <span class="animated-word-hero" style="animation-delay: 0.7s;">and</span>
                         <span class="dramatic-word" style="animation-delay: 0.9s;">smart</span>
                         <br/>
-                        <span class="animated-word-hero" style="animation-delay: 1.1s;">Enterprises</span>
+                        <span class="animated-word-hero white-word" style="animation-delay: 1.1s;">Enterprises</span>
                 </h1>
-                    <p class="text-xl md:text-2xl text-secondary max-w-3xl mx-auto mb-12 animate-on-scroll" style="color: var(--text-secondary); animation-delay: 1.9s;">
+                    <p class="text-xl md:text-2xl text-secondary max-w-3xl mx-auto mb-12 animate-on-scroll" style="color: #FFFFFF; animation-delay: 1.9s;">
                     From Microsoft Cloud to Managed IT and Cybersecurity—Elaka Technologies turns ideas into resilient digital experiences.
                 </p>
                     <div class="flex flex-col sm:flex-row justify-center gap-6 animate-on-scroll" style="animation-delay: 2.1s;">
